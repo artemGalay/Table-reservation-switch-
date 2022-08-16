@@ -68,20 +68,20 @@ class SecondViewController: UIViewController {
         alertController.addAction(calcelAction)
         self.present(alertController, animated: true, completion: nil)
 
+//MARK: - переход на новый экран через alert
+
         let okAction = UIAlertAction(title: "Чек", style: .default) { (okAction) in
             let thirdViewController: ThirdViewController = ThirdViewController()
             thirdViewController.modalPresentationStyle = .fullScreen
             self.present(thirdViewController, animated: true, completion: nil)
         }
         alertController.addAction(okAction)
-
         }
 
     private func buttonBackTapped() {
         let firstViewController: ViewController = ViewController()
         firstViewController.modalPresentationStyle = .fullScreen
         self.present(firstViewController, animated: true, completion: nil)
-
     }
 
     @objc private func buttonTapped() {
