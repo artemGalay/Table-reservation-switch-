@@ -18,6 +18,8 @@ class ViewController: UIViewController {
         return label
     }()
 
+//MARK: - Одинаковые лейблы(расширил UILabel в папке Extension)
+
     private let emailLabel = UILabel(text: "Email")
 
     private let passwordLabel = UILabel(text: "Password")
@@ -41,7 +43,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setConstraints()
-
     }
 
     private func buttonAction() {
@@ -51,10 +52,12 @@ class ViewController: UIViewController {
             alertController.addAction(action)
             self.present(alertController, animated: true, completion: nil)
         } else {
+
+            //MARK: - переход на новый экран
+
             let secondViewController: SecondViewController = SecondViewController()
             secondViewController.modalPresentationStyle = .fullScreen
             self.present(secondViewController, animated: true, completion: nil)
-
         }
         }
 
