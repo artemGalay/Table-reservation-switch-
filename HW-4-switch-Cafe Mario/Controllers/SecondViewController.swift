@@ -45,10 +45,19 @@ class SecondViewController: UIViewController {
         return button
     }()
 
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("< Back", for: .normal)
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(buttonTappedBack), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupHierarchy()
-        setupLayout()
+        setupViews()
+        setConstraints()
     }
 
     private func buttonAction() {
@@ -61,18 +70,31 @@ class SecondViewController: UIViewController {
 
         let okAction = UIAlertAction(title: "Чек", style: .default) { (okAction) in
             let thirdViewController: ThirdViewController = ThirdViewController()
+            thirdViewController.modalPresentationStyle = .fullScreen
             self.present(thirdViewController, animated: true, completion: nil)
         }
         alertController.addAction(okAction)
 
         }
 
+    private func buttonBackTapped() {
+        let firstViewController: ViewController = ViewController()
+        firstViewController.modalPresentationStyle = .fullScreen
+        self.present(firstViewController, animated: true, completion: nil)
+
+    }
+
     @objc private func buttonTapped() {
         buttonAction()
     }
 
-    private func setupHierarchy() {
+    @objc private func buttonTappedBack() {
+        buttonBackTapped()
+    }
+
+    private func setupViews() {
         view.backgroundColor = .white
+        modalPresentationStyle = .fullScreen
         view.addSubview(cafeMarioLabel)
         view.addSubview(nameLabel)
         view.addSubview(nubmerOfGuestLabel)
@@ -87,9 +109,10 @@ class SecondViewController: UIViewController {
         view.addSubview(prepaySwitch)
         view.addSubview(vipRoomSwitch)
         view.addSubview(accountButton)
+        view.addSubview(backButton)
     }
 
-    private func setupLayout() {
+    private func setConstraints() {
 
         NSLayoutConstraint.activate([
             cafeMarioLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -168,6 +191,11 @@ class SecondViewController: UIViewController {
             accountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
             accountButton.widthAnchor.constraint(equalToConstant: 360),
             accountButton.heightAnchor.constraint(equalToConstant: 60)
+        ])
+
+        NSLayoutConstraint.activate([
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10)
         ])
 }
 }

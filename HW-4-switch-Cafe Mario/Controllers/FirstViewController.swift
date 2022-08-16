@@ -39,8 +39,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupHierarchy()
-        setupLayout()
+        setupViews()
+        setConstraints()
 
     }
 
@@ -52,6 +52,7 @@ class ViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         } else {
             let secondViewController: SecondViewController = SecondViewController()
+            secondViewController.modalPresentationStyle = .fullScreen
             self.present(secondViewController, animated: true, completion: nil)
 
         }
@@ -61,7 +62,8 @@ class ViewController: UIViewController {
         buttonAction()
     }
 
-    private func setupHierarchy() {
+    private func setupViews() {
+        view.backgroundColor = .white
         view.addSubview(singInLabel)
         view.addSubview(emailText)
         view.addSubview(emailLabel)
@@ -70,7 +72,7 @@ class ViewController: UIViewController {
         view.addSubview(enterButton)
     }
 
-    private func setupLayout() {
+    private func setConstraints() {
 
         NSLayoutConstraint.activate([
             singInLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 350),
